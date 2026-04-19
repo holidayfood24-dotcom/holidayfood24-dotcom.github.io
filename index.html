@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Holiday Food - Menü</title>
+<meta name="description" content="Holiday Food - Burger, Çıtır Tavuk, Wings ve daha fazlası">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:#FFF8F0;color:#1A1A1A;line-height:1.5;padding-bottom:90px}
+
+/* HEADER */
+.header{background:linear-gradient(135deg,#E31E24 0%,#B01419 100%);color:white;padding:28px 20px 24px;text-align:center;box-shadow:0 4px 20px rgba(227,30,36,.25)}
+.logo-circle{width:90px;height:90px;background:white;border-radius:50%;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,.15);overflow:hidden}
+.logo-circle img{width:100%;height:100%;object-fit:cover}
+.brand-title{font-family:'Bebas Neue',sans-serif;font-size:44px;letter-spacing:3px;margin-bottom:4px;font-weight:400}
+.brand-sub{font-size:13px;opacity:.9;letter-spacing:2px;text-transform:uppercase;font-weight:500}
+
+/* CONTACT BAR */
+.contact-bar{display:flex;gap:8px;padding:12px;background:white;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.contact-btn{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:10px;border-radius:10px;font-size:13px;font-weight:600;text-decoration:none;transition:transform .15s}
+.contact-btn:active{transform:scale(.95)}
+.contact-btn svg{width:18px;height:18px;flex-shrink:0}
+.btn-call{background:#1A1A1A;color:white}
+.btn-wa{background:#25D366;color:white}
+.btn-ig{background:linear-gradient(45deg,#F58529,#DD2A7B,#8134AF);color:white}
+
+/* SEARCH */
+.search-wrap{padding:14px 16px 0;position:relative}
+.search-input{width:100%;padding:12px 16px 12px 44px;border:2px solid #EEE;border-radius:12px;font-size:15px;font-family:inherit;background:white;transition:border-color .2s}
+.search-input:focus{outline:none;border-color:#E31E24}
+.search-icon{position:absolute;left:28px;top:50%;transform:translateY(-50%);color:#999;pointer-events:none}
+
+/* CATEGORY NAV */
+.cat-nav{display:flex;gap:8px;padding:14px 16px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.cat-nav::-webkit-scrollbar{display:none}
+.cat-chip{flex-shrink:0;padding:8px 16px;background:white;border:2px solid #EEE;border-radius:20px;font-size:13px;font-weight:600;color:#555;cursor:pointer;transition:all .2s;white-space:nowrap}
+.cat-chip.active{background:#E31E24;color:white;border-color:#E31E24}
+
+/* SECTIONS */
+.category{padding:18px 16px 8px}
+.cat-header{display:flex;align-items:center;gap:12px;margin-bottom:14px;padding:12px 16px;background:linear-gradient(135deg,#E31E24 0%,#B01419 100%);border-radius:12px;color:white;box-shadow:0 4px 12px rgba(227,30,36,.2)}
+.cat-header h2{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:2px;font-weight:400;flex:1}
+.cat-header .cat-icon{font-size:22px}
+
+/* ITEMS */
+.item{display:flex;gap:14px;padding:14px;background:white;border-radius:12px;margin-bottom:10px;box-shadow:0 2px 8px rgba(0,0,0,.05);transition:transform .15s}
+.item:active{transform:scale(.98)}
+.item-img{width:80px;height:80px;flex-shrink:0;background:linear-gradient(135deg,#FFF0E8,#FFE4D4);border-radius:10px;display:flex;align-items:center;justify-content:center;color:#D4A373;font-size:28px;overflow:hidden}
+.item-img img{width:100%;height:100%;object-fit:cover}
+.item-body{flex:1;display:flex;flex-direction:column;justify-content:center;min-width:0}
+.item-name{font-size:15px;font-weight:700;color:#1A1A1A;margin-bottom:3px;line-height:1.3}
+.item-desc{font-size:12px;color:#666;line-height:1.4;margin-bottom:6px}
+.item-price{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#E31E24;font-weight:400;letter-spacing:1px}
+
+/* SMALL ITEMS (drinks, sauces) */
+.item-small{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;background:white;border-radius:10px;margin-bottom:6px;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.item-small-name{font-size:14px;font-weight:500;color:#1A1A1A}
+.item-small-price{font-family:'Bebas Neue',sans-serif;font-size:18px;color:#E31E24;letter-spacing:1px}
+
+/* FOOTER */
+.footer{background:linear-gradient(135deg,#1A1A1A 0%,#2A2A2A 100%);color:white;padding:24px 20px;text-align:center;margin-top:20px}
+.footer-title{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:3px;margin-bottom:8px}
+.footer-note{font-size:12px;opacity:.7;margin-top:12px}
+
+/* FLOATING ORDER BUTTON */
+.floating-order{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#25D366;color:white;padding:14px 28px;border-radius:30px;text-decoration:none;font-weight:700;font-size:15px;box-shadow:0 8px 24px rgba(37,211,102,.4);display:flex;align-items:center;gap:8px;z-index:50;transition:transform .15s}
+.floating-order:active{transform:translateX(-50%) scale(.95)}
+
+.hidden{display:none !important}
+.no-results{text-align:center;padding:40px 20px;color:#999;font-size:14px}
+
+@media(min-width:600px){
+  body{max-width:600px;margin:0 auto;box-shadow:0 0 40px rgba(0,0,0,.08)}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="logo-circle">
+    <img src="logo.jpg" alt="Holiday Food" onerror="this.style.display='none';this.parentElement.innerHTML='🍔'">
+  </div>
+  <div class="brand-title">HOLIDAY FOOD</div>
+  <div class="brand-sub">Menü</div>
+</div>
+
+<!-- CONTACT BAR -->
+<div class="contact-bar">
+  <a href="tel:+905332168419" class="contact-btn btn-call">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 15.5c-1.2 0-2.4-.2-3.6-.6-.3-.1-.7 0-1 .2l-2.2 2.2c-2.8-1.4-5.1-3.8-6.6-6.6l2.2-2.2c.3-.3.4-.7.2-1C8.7 6.4 8.5 5.2 8.5 4c0-.6-.5-1-1-1H4c-.6 0-1 .4-1 1 0 9.4 7.6 17 17 17 .6 0 1-.4 1-1v-3.5c0-.6-.4-1-1-1zM19 12h2c0-5-4-9-9-9v2c3.9 0 7 3.1 7 7zm-4 0h2c0-2.8-2.2-5-5-5v2c1.7 0 3 1.3 3 3z"/></svg>
+    Ara
+  </a>
+  <a href="https://wa.me/905332168419" class="contact-btn btn-wa" target="_blank">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.7 1-.9 1.2-.2.2-.3.2-.6.1-.9-.4-1.8-.9-2.5-1.7-.6-.6-1.1-1.3-1.5-2.1-.2-.3 0-.4.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.4.1-.2 0-.3 0-.4s-.7-1.6-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.2-.7.4-.8.8-1.3 1.8-1.3 2.9.1 1.3.6 2.5 1.4 3.6 1.5 2.2 3.4 4 5.7 5 .7.3 1.3.5 2 .6.7.1 1.4.1 2-.1.7-.1 2.2-.9 2.5-1.8.3-.9.3-1.6.2-1.8-.1-.2-.3-.2-.6-.3zM12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.5 1.3 5l-1.3 5 5.1-1.3c1.5.8 3.1 1.2 4.9 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18c-1.6 0-3.2-.4-4.5-1.2l-.3-.2-3.3.9.9-3.2-.2-.3C3.7 15 3.2 13.5 3.2 12c0-4.8 3.9-8.8 8.8-8.8s8.8 3.9 8.8 8.8c0 4.9-4 8.8-8.8 8.8z"/></svg>
+    WhatsApp
+  </a>
+  <a href="https://instagram.com/holiday.food24" class="contact-btn btn-ig" target="_blank">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.9.9 1.4.2.4.4 1 .4 2.2.1 1.2.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.9.7-1.4.9-.4.2-1 .4-2.2.4-1.2.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.9-.9-1.4-.2-.4-.4-1-.4-2.2-.1-1.2-.1-1.6-.1-4.8s0-3.6.1-4.8c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.9-.7 1.4-.9.4-.2 1-.4 2.2-.4 1.2-.1 1.6-.1 4.8-.1M12 0C8.7 0 8.3 0 7.1.1 5.8.1 4.9.3 4.1.6c-.8.3-1.5.7-2.2 1.4C1.3 2.7.8 3.3.5 4.1.3 4.9.1 5.8.1 7.1 0 8.3 0 8.7 0 12s0 3.7.1 4.9c.1 1.3.2 2.2.5 3 .3.8.7 1.5 1.4 2.2.7.7 1.4 1.1 2.2 1.4.8.3 1.7.5 3 .5 1.2.1 1.6.1 4.9.1s3.7 0 4.9-.1c1.3-.1 2.2-.2 3-.5.8-.3 1.5-.7 2.2-1.4.7-.7 1.1-1.4 1.4-2.2.3-.8.5-1.7.5-3 .1-1.2.1-1.6.1-4.9s0-3.7-.1-4.9c-.1-1.3-.2-2.2-.5-3-.3-.8-.7-1.5-1.4-2.2C21.3 1.3 20.7.8 19.9.5 19.1.3 18.2.1 16.9.1 15.7 0 15.3 0 12 0zm0 5.8c-3.4 0-6.2 2.8-6.2 6.2s2.8 6.2 6.2 6.2 6.2-2.8 6.2-6.2-2.8-6.2-6.2-6.2zm0 10.2c-2.2 0-4-1.8-4-4s1.8-4 4-4 4 1.8 4 4-1.8 4-4 4zm6.4-11.8c-.8 0-1.4.6-1.4 1.4s.6 1.4 1.4 1.4 1.4-.6 1.4-1.4-.6-1.4-1.4-1.4z"/></svg>
+    Instagram
+  </a>
+</div>
+
+<!-- SEARCH -->
+<div class="search-wrap">
+  <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+  <input type="text" class="search-input" id="searchInput" placeholder="Ürün ara...">
+</div>
+
+<!-- CATEGORY NAV -->
+<div class="cat-nav" id="catNav">
+  <div class="cat-chip active" data-cat="all">Tümü</div>
+  <div class="cat-chip" data-cat="menuler">Menüler</div>
+  <div class="cat-chip" data-cat="citirtavuk">Çıtır Tavuk</div>
+  <div class="cat-chip" data-cat="wings">Wings</div>
+  <div class="cat-chip" data-cat="etburger">Et Burger</div>
+  <div class="cat-chip" data-cat="tavukburger">Tavuk Burger</div>
+  <div class="cat-chip" data-cat="yan">Yan Ürünler</div>
+  <div class="cat-chip" data-cat="icecek">İçecekler</div>
+  <div class="cat-chip" data-cat="sos">Soslar</div>
+</div>
+
+<div id="menuContent">
+<!-- MENÜLER -->
+<div class="category" data-category="menuler">
+  <div class="cat-header"><span class="cat-icon">🍔</span><h2>MENÜLER</h2></div>
+  <div class="item"><div class="item-img"><img src="urun/2li-et-burger.jpg" alt="" onerror="this.style.display='none';this.parentElement.textContent='🍔'"></div><div class="item-body"><div class="item-name">2'li Et Burger Menü</div><div class="item-desc">Litrelik içecekle seçim senin</div><div class="item-price">960 TL</div></div></div>
+  <div class="item"><div class="item-img"><img src="urun/3lu-et-burger.jpg" alt="" onerror="this.style.display='none';this.parentElement.textContent='🍔'"></div><div class="item-body"><div class="item-name">3'lü Et Burger Menü</div><div class="item-desc">2x Litrelik içecekle seçim senin</div><div class="item-price">1450 TL</div></div></div>
+  <div class="item"><div class="item-img"><img src="urun/4lu-et-burger.jpg" alt="" onerror="this.style.display='none';this.parentElement.textContent='🍔'"></div><div class="item-body"><div class="item-name">4'lü Et Burger Menü</div><div class="item-desc">2x Litrelik içecekle seçim senin</div><div class="item-price">1900 TL</div></div></div>
+  <div class="item"><div class="item-img"><img src="urun/kofte-citir-firsat.jpg" alt="" onerror="this.style.display='none';this.parentElement.textContent='🍔'"></div><div class="item-body"><div class="item-name">Köfte Burgerli & Çıtır Tavuklu Fırsat</div><div class="item-desc">Kutu içecek ve 3 adet Cajun Chicken</div><div class="item-price">560 TL</div></div></div>
+  <div class="item"><div class="item-img"><img src="urun/all-star.jpg" alt="" onerror="this.style.display='none';this.parentElement.textContent='⭐'"></div><div class="item-body"><div class="item-name">All Star Burger Menü</div><div class="item-desc">Kutu içecek, 3 Cajun Chicken, 3 soğan halkası, 3 kroket</div><div class="item-price">625 TL</div></div></div>
+  <div class="item"><div class="item-img"><img src="urun/2li-citir-tavuk-burger.jpg" alt="" onerror="this.style.display='none';this.parentElement.textContent='🍗'"></div><div class="item-body"><div class="item-name">2'li Çıtır Tavuk Burger Menü</div><div class="item-desc">Litrelik içecekli</div><div class="item-price">775 TL</div></div></div>
+  <div class="item"><div class="item-img"><img src="urun/holiday-citir.jpg" alt="" onerror="this.style.display='none';this.parentElement.textContent='🍗'"></div><div class="item-body"><div class="item-name">Holiday Çıtır Tavuk Menü</div><div class="item-desc">Kutu içecekli</div><div class="item-price">525 TL</div></div></div>
+</div>
+
+<!-- GRAMAJLI ÇITIR TAVUK -->
+<div class="category" data-category="citirtavuk">
+  <div class="cat-header"><span class="cat-icon">🍗</span><h2>GRAMAJLI ÇITIR TAVUK MENÜ</h2></div>
+  <div class="item"><div class="item-img"><img src="urun/eko-citir.jpg" alt="" onerror="this.style.display='none';this.parentElement.textContent='🍗'"></div><div class="item-body"><div class="item-name">Eko Çıtır Tavuk Menü</div><div class="item-desc">Kutu içecekli</div><div class="item-price">350 TL</div></div></div>
+  <div class="item"><div class="item-img"><img src="urun/citir-250.jpg" alt="" onerror="this.style.display='none';this.parentElement.textContent='🍗'"></div><div class="item-body"><div class="item-name">Çıtır Tavuk 250 gr Menü</div><div class="item-price">370 TL</div></div></div>
+  <div class="item"><div class="item-img"><img src="urun/citir-350.jpg" alt="" onerror="this.style.display='none';this.parentElement.textContent='🍗'"></div><div class="item-body"><div class="item-name">Çıtır Tavuk 350 gr Menü</div><div class="item-price">400 TL</div></div></div>
+  <div class="item"><div class="item-img"><img src="urun/citir-500.jpg" alt="" onerror="this.style.display='none';this.parentElement.textContent='🍗'"></div><div class="item-body"><div class="item-name">Çıtır Tavuk 500 gr Menü</div><div class="item-price">590 TL</div></div></div>
+  <div class="item"><div class="item-img"><img src="urun/citir-750.jpg" alt="" onerror="this.style.display='none';this.parentElement.textContent='🍗'"></div><div class="item-body"><div class="item-name">Çıtır Tavuk 750 gr Menü</div><div class="item-price">1000 TL</div></div></div>
+  <div class="item"><div class="item-img"><img src="urun/citir-1kg.jpg" alt="" onerror="this.style.display='none';this.parentElement.textContent='🍗'"></div><div class="item-body"><div class="item-name">Çıtır Tavuk 1 Kg Menü</div><div class="item-price">1150 TL</div></div></div>
+</div>
+
+<!-- CHICKEN WINGS -->
+<div class="category" data-category="wings">
+  <div class="cat-header"><span class="cat-icon">🔥</span><h2>CHICKEN WINGS MENÜ</h2></div>
+  <div class="item"><div class="item-img"><img src="urun/6li-wings.jpg" alt="" onerror="this.style.display='none';this.parentElement.textContent='🔥'"></div><div class="item-body"><div class="item-name">6'lı Chicken Wings Menü</div><div class="item-desc">Kutu içecekli</div><div class="item-price">525 TL</div></div></div>
+  <div class="item"><div class="item-img"><img src="urun/efsane-wings.jpg" alt="" onerror="this.style.display='none';this.parentElement.textContent='🔥'"></div><div class="item-body"><div class="item-name">Efsane Çıtır 6'lı Tavuk Kanat Menü</div><div class="item-price">475 TL</div></div></div>
+</div>
+
+<!-- TEKLİ ET BURGERLER -->
+<div class="category" data-category="etburger">
+  <div class="cat-header"><span class="cat-icon">🍔</span><h2>TEKLİ ET BURGERLER</h2></div>
+  <div class="item"><div class="item-img"><img src="urun/cheese-kofte.jpg" alt="" onerror="this.style.display='none';this.parentElement.textContent='🍔'"></div><div class="item-body"><div class="item-name">Cheese Köfte Burger</div><div class="item-price">450 TL</div></div></div>
+  <div class="item"><div class="item-img"><img src="urun/bbq-kofte.jpg" alt="" onerror="this.style.display='none';this.parentElement.textContent='🍔'"></div><div class="item-body"><div class="item-name">BBQ Köfte Burger</div><div class="item-price">450 TL</div></div></div>
+  <div class="item"><div class="item-img"><img src="urun/burning-kofte.jpg" alt="" onerror="this.style.display='none';this.parentElement.textContent='🔥'"></div><div class="item-body"><div class="item-name">Burning Köfte Burger</div><div class="item-price">450 TL</div></div></div>
+  <div class="item"><div class="item-img"><img src="urun/oze.jpg" alt="" onerror="this.style.display='none';this.parentElement.textContent='🍔'"></div><div class="item-body"><div class="item-name">OZE Burger</div><div class="item-desc">Karamelize soğan ve kutu içecekle</div><div class="item-price">520 TL</div></div></div>
+  <div class="item"><div class="item-img"><img src="urun/truf-burger.jpg" alt="" onerror="this.style.display='none';this.parentElement.textContent='🍔'"></div><div class="item-body"><div class="item-name">Siyah Trüf Mantar Soslu Burger</div><div class="item-price">490 TL</div></div></div>
+  <div class="item"><div class="item-img"><img src="urun/smoked-prime.jpg" alt="" onerror="this.style.display='none';this.parentElement.textContent='🍔'"></div><div class="item-body"><div class="item-name">Smoked Prime Burger</div><div class="item-price">540 TL</div></div></div>
+  <div class="item"><div class="item-img"><img src="urun/double.jpg" alt="" onerror="this.style.display='none';this.parentElement.textContent='🍔'"></div><div class="item-body"><div class="item-name">Double Burger</div><div class="item-price">740 TL</div></div></div>
+</div>
+
+<!-- TEKLİ ÇITIR TAVUK BURGERLER -->
+<div class="category" data-category="tavukburger">
+  <div class="cat-header"><span class="cat-icon">🍗</span><h2>TEKLİ ÇITIR TAVUK BURGERLER</h2></div>
+  <div class="item"><div class="item-img"><img src="urun/citir-burger.jpg" alt="" onerror="this.style.display='none';this.parentElement.textContent='🍗'"></div><div class="item-body"><div class="item-name">Çıtır Tavuk Burger</div><div class="item-price">370 TL</div></div></div>
+  <div class="item"><div class="item-img"><img src="urun/klasik-citir.jpg" alt="" onerror="this.style.display='none';this.parentElement.textContent='🍗'"></div><div class="item-body"><div class="item-name">Klasik Çıtır Tavuk Burger</div><div class="item-price">370 TL</div></div></div>
+  <div class="item"><div class="item-img"><img src="urun/burning-citir.jpg" alt="" onerror="this.style.display='none';this.parentElement.textContent='🔥'"></div><div class="item-body"><div class="item-name">Burning Çıtır Tavuk Burger</div><div class="item-price">370 TL</div></div></div>
+  <div class="item"><div class="item-img"><img src="urun/bbq-citir.jpg" alt="" onerror="this.style.display='none';this.parentElement.textContent='🍗'"></div><div class="item-body"><div class="item-name">BBQ Soslu Çıtır Tavuk Burger</div><div class="item-price">370 TL</div></div></div>
+  <div class="item"><div class="item-img"><img src="urun/crunch-king.jpg" alt="" onerror="this.style.display='none';this.parentElement.textContent='🍗'"></div><div class="item-body"><div class="item-name">Crunch King Burger</div><div class="item-price">400 TL</div></div></div>
+  <div class="item"><div class="item-img"><img src="urun/truf-citir.jpg" alt="" onerror="this.style.display='none';this.parentElement.textContent='🍗'"></div><div class="item-body"><div class="item-name">Siyah Trüf Mantar Soslu Çıtır Tavuk</div><div class="item-price">400 TL</div></div></div>
+  <div class="item"><div class="item-img"><img src="urun/mix-citir.jpg" alt="" onerror="this.style.display='none';this.parentElement.textContent='🍗'"></div><div class="item-body"><div class="item-name">Mix Çıtır Tavuk Burger</div><div class="item-price">400 TL</div></div></div>
+  <div class="item"><div class="item-img"><img src="urun/durum.jpg" alt="" onerror="this.style.display='none';this.parentElement.textContent='🌯'"></div><div class="item-body"><div class="item-name">Çıtır Tavuk Dürüm</div><div class="item-desc">Kutu içecekli</div><div class="item-price">375 TL</div></div></div>
+</div>
+
+<!-- YAN ÜRÜNLER -->
+<div class="category" data-category="yan">
+  <div class="cat-header"><span class="cat-icon">🍟</span><h2>YAN ÜRÜNLER</h2></div>
+  <div class="item"><div class="item-img"><img src="urun/sicak-sepet.jpg" alt="" onerror="this.style.display='none';this.parentElement.textContent='🧺'"></div><div class="item-body"><div class="item-name">Holiday Sıcak Sepet</div><div class="item-price">370 TL</div></div></div>
+  <div class="item-small"><span class="item-small-name">Patates Kızartması (Orta)</span><span class="item-small-price">110 TL</span></div>
+  <div class="item-small"><span class="item-small-name">6'lı Soğan Halkası</span><span class="item-small-price">110 TL</span></div>
+  <div class="item-small"><span class="item-small-name">Patates Kroket (8 Adet)</span><span class="item-small-price">110 TL</span></div>
+  <div class="item-small"><span class="item-small-name">Mozerella Sticks (3 Adet)</span><span class="item-small-price">110 TL</span></div>
+  <div class="item-small"><span class="item-small-name">İçli Köfte (3x45 gr)</span><span class="item-small-price">145 TL</span></div>
+  <div class="item-small"><span class="item-small-name">Piliç Nugget (6 Adet)</span><span class="item-small-price">110 TL</span></div>
+  <div class="item-small"><span class="item-small-name">Patates Kızartması (Mini)</span><span class="item-small-price">90 TL</span></div>
+  <div class="item-small"><span class="item-small-name">Soğan Halkası (2 Adet)</span><span class="item-small-price">25 TL</span></div>
+  <div class="item-small"><span class="item-small-name">Lavaş</span><span class="item-small-price">20 TL</span></div>
+</div>
+
+<!-- İÇECEKLER -->
+<div class="category" data-category="icecek">
+  <div class="cat-header"><span class="cat-icon">🥤</span><h2>İÇECEKLER</h2></div>
+  <div class="item-small"><span class="item-small-name">Coca Cola 1 LT</span><span class="item-small-price">110 TL</span></div>
+  <div class="item-small"><span class="item-small-name">Coca Cola Zero 1 LT</span><span class="item-small-price">110 TL</span></div>
+  <div class="item-small"><span class="item-small-name">Fanta 1 LT</span><span class="item-small-price">110 TL</span></div>
+  <div class="item-small"><span class="item-small-name">Sprite 1 LT</span><span class="item-small-price">110 TL</span></div>
+  <div class="item-small"><span class="item-small-name">Sütaş Ayran 1 LT</span><span class="item-small-price">110 TL</span></div>
+  <div class="item-small"><span class="item-small-name">Coca Cola 330 cl</span><span class="item-small-price">90 TL</span></div>
+  <div class="item-small"><span class="item-small-name">Coca Cola Zero 330 cl</span><span class="item-small-price">90 TL</span></div>
+  <div class="item-small"><span class="item-small-name">Fanta 330 cl</span><span class="item-small-price">90 TL</span></div>
+  <div class="item-small"><span class="item-small-name">Sprite 330 cl</span><span class="item-small-price">90 TL</span></div>
+  <div class="item-small"><span class="item-small-name">Ayran 170 ml</span><span class="item-small-price">75 TL</span></div>
+  <div class="item-small"><span class="item-small-name">Beypazarı (Damla) Soda</span><span class="item-small-price">75 TL</span></div>
+  <div class="item-small"><span class="item-small-name">Su 0.5 L</span><span class="item-small-price">50 TL</span></div>
+</div>
+
+<!-- SOSLAR -->
+<div class="category" data-category="sos">
+  <div class="cat-header"><span class="cat-icon">🌶️</span><h2>SOSLAR</h2></div>
+  <div class="item-small"><span class="item-small-name">Burger Sos</span><span class="item-small-price">18 TL</span></div>
+  <div class="item-small"><span class="item-small-name">Cheddar Sos 20g</span><span class="item-small-price">23 TL</span></div>
+  <div class="item-small"><span class="item-small-name">Sweet Chilli Sos</span><span class="item-small-price">23 TL</span></div>
+  <div class="item-small"><span class="item-small-name">Colorado Barbekü Sos</span><span class="item-small-price">17 TL</span></div>
+  <div class="item-small"><span class="item-small-name">Colorado Ranch Sos 20g</span><span class="item-small-price">19 TL</span></div>
+  <div class="item-small"><span class="item-small-name">Colorado Hot Chili Sos 20g</span><span class="item-small-price">14 TL</span></div>
+  <div class="item-small"><span class="item-small-name">Colorado Garlic Sos 20g</span><span class="item-small-price">15 TL</span></div>
+  <div class="item-small"><span class="item-small-name">Colorado Ballı Hardal 20g</span><span class="item-small-price">23 TL</span></div>
+</div>
+</div>
+
+<div class="no-results hidden" id="noResults">Aradığınız ürün bulunamadı</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-title">HOLIDAY FOOD</div>
+  <div style="font-size:14px;opacity:.8">📞 0533 216 84 19</div>
+  <div class="footer-note">Fiyatlarımıza KDV dahildir<br>Afiyet olsun!</div>
+</div>
+
+<!-- FLOATING ORDER BUTTON -->
+<a href="https://wa.me/905332168419?text=Merhaba,%20sipariş%20vermek%20istiyorum" class="floating-order" target="_blank">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.7 1-.9 1.2-.2.2-.3.2-.6.1-.9-.4-1.8-.9-2.5-1.7-.6-.6-1.1-1.3-1.5-2.1-.2-.3 0-.4.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.4.1-.2 0-.3 0-.4s-.7-1.6-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.2-.7.4-.8.8-1.3 1.8-1.3 2.9.1 1.3.6 2.5 1.4 3.6 1.5 2.2 3.4 4 5.7 5 .7.3 1.3.5 2 .6.7.1 1.4.1 2-.1.7-.1 2.2-.9 2.5-1.8.3-.9.3-1.6.2-1.8-.1-.2-.3-.2-.6-.3zM12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.5 1.3 5l-1.3 5 5.1-1.3c1.5.8 3.1 1.2 4.9 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg>
+  WhatsApp'tan Sipariş Ver
+</a>
+
+<script>
+// Kategori filtreleme
+const chips = document.querySelectorAll('.cat-chip');
+const categories = document.querySelectorAll('.category');
+const searchInput = document.getElementById('searchInput');
+const noResults = document.getElementById('noResults');
+
+chips.forEach(chip => {
+  chip.addEventListener('click', () => {
+    chips.forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+    const cat = chip.dataset.cat;
+    searchInput.value = '';
+    categories.forEach(c => {
+      if (cat === 'all' || c.dataset.category === cat) {
+        c.classList.remove('hidden');
+        // Tüm item'ları tekrar göster
+        c.querySelectorAll('.item, .item-small').forEach(i => i.classList.remove('hidden'));
+      } else {
+        c.classList.add('hidden');
+      }
+    });
+    noResults.classList.add('hidden');
+    // Kategoriye smooth scroll (sadece tek kategori seçildiyse)
+    if (cat !== 'all') {
+      const target = document.querySelector(`[data-category="${cat}"]`);
+      if (target) target.scrollIntoView({behavior:'smooth', block:'start'});
+    }
+  });
+});
+
+// Arama
+searchInput.addEventListener('input', e => {
+  const q = e.target.value.toLowerCase().trim();
+  // Arama yaparken tüm kategorileri aç
+  chips.forEach(c => c.classList.remove('active'));
+  chips[0].classList.add('active');
+  
+  if (!q) {
+    categories.forEach(c => {
+      c.classList.remove('hidden');
+      c.querySelectorAll('.item, .item-small').forEach(i => i.classList.remove('hidden'));
+    });
+    noResults.classList.add('hidden');
+    return;
+  }
+  
+  let hasResults = false;
+  categories.forEach(c => {
+    let catHasMatch = false;
+    c.querySelectorAll('.item').forEach(item => {
+      const name = item.querySelector('.item-name').textContent.toLowerCase();
+      const desc = item.querySelector('.item-desc')?.textContent.toLowerCase() || '';
+      if (name.includes(q) || desc.includes(q)) {
+        item.classList.remove('hidden');
+        catHasMatch = true;
+        hasResults = true;
+      } else {
+        item.classList.add('hidden');
+      }
+    });
+    c.querySelectorAll('.item-small').forEach(item => {
+      const name = item.querySelector('.item-small-name').textContent.toLowerCase();
+      if (name.includes(q)) {
+        item.classList.remove('hidden');
+        catHasMatch = true;
+        hasResults = true;
+      } else {
+        item.classList.add('hidden');
+      }
+    });
+    c.classList.toggle('hidden', !catHasMatch);
+  });
+  noResults.classList.toggle('hidden', hasResults);
+});
+</script>
+</body>
+</html>
